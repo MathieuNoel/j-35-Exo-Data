@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O'dle</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <h1>O'dle</h1>
+    <div id="stats">
+        <output id="stat-lumbering"></output>
+        <output id="stat-lumber"></output>
+        <output id="stat-sawmill-level"></output>
+        <output id="stat-silo-level"></output>
+        <output class="soon" id="stat-next-wave"></output>
+        <output class="soon" id="stat-enemies"></output>
+        <output class="soon" id="stat-defense-level"></output>
+        <output class="soon" id="stat-militia-level"></output>
+    </div>
+    <div id="actions">
+        <button id="action-upgrade-sawmill" class="available" title="La scierie augmente le rendement de la production">Construire une scierie</button>
+        <button id="action-upgrade-silo" title="L'entrepôt augmente la capacité de stockage de bois">Construire un silo</button>
+        <button class="soon" id="action-upgrade-defense">Construire des fortifications</button>
+        <button class="soon" id="action-upgrade-militia">Former une milice</button>
+    </div>
+
+    <h3>Un peu d'aide ?</h3>
+    <p>Vous êtes à la tête d'une exploitation forestière... Enfin, ça en sera une un jour. Pour l'heure, vous avez une scie, votre talent et votre patience et face à vous se dressent des arbres à perte de vue. C'est un bon départ.</p>
+    <p>Quand vous aurez abattu quelques troncs et débité tout ça proprement, vous pourrez probablement bâtir une petite scierie et commencer à rendre le procédé un peu moins pénible et un peu plus rentable.</p>
+    <p>Et puis, il faudra gérer le problème du stockage aussi...</p>
+
+    <script src="./game.js"></script>
+</body>
+</html>

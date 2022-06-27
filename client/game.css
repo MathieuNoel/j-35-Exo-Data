@@ -1,0 +1,86 @@
+body {
+    color: #333;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    width: 500px;
+    margin: 0 auto;
+    padding: .1em;
+    min-height: 100vh;
+    box-sizing: border-box;
+    background: #ca9 url('./lumber.png') no-repeat 3% 97%;
+}
+
+.soon {
+    display: none;
+}
+
+#stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 1px solid #ccc;
+    background-color: #ddd;
+    padding: 15px;
+}
+
+#stats > output {
+    margin: .3em 0;
+}
+
+#stats > output::before {
+    display: inline-block;
+    color: #000;
+    width: 18em;
+}
+
+#stat-lumbering::before {
+    content: 'Production de bois ';
+}
+
+#stat-lumber::before {
+    content: 'Stock de bois ';
+}
+
+#stat-sawmill-level::before {
+    content: 'Niveau de la scierie ';
+}
+
+#stat-silo-level::before {
+    content: 'Niveau de l\'entrepôt ';
+}
+
+#stat-next-wave::before {
+    content: 'Prochaine vague (nb ennemis) ';
+}
+
+#stat-enemies::before {
+    content: 'Ennemis aux portes ';
+}
+
+#stat-defense-level::before {
+    content: 'Niveau des fortifications ';
+}
+
+#stat-militia-level::before {
+    content: 'Niveau de la milice ';
+}
+
+#actions {
+    margin-top: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+#actions > button {
+    display: none;
+    padding: .7em;
+    margin: .2em 0;
+}
+
+#actions > button.available {
+    display: inline-block;
+}
+
+#actions > button > img {
+    width: 1em;
+}
