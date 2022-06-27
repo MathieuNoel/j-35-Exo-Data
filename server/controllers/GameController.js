@@ -5,9 +5,10 @@ const Silo = require('../models/Silo');
 const GameController = {
     status: (request, response) => {
         const { game } = request.session;
+        // console.log(game);
 
         // mettre à jour la partie
-        
+        Game.update(game)
         // renvoyer le nouvel état de la partie
     },
 
@@ -15,7 +16,7 @@ const GameController = {
         const { game } = request.session;
 
         // mettre à jour la partie, sinon on ne sera pas certain que le coût puisse être payé
-
+        game.generate(game)
         // si le stock permet de payer le coût
           // on retire le coût du stock
           // et on remplace la scierie actuelle par celle du niveau supérieur
@@ -37,7 +38,7 @@ const GameController = {
     },
 
     initGame: (request, response, next) => {
-
+      Game.generate()
       // ce MW ne répond pas, donc il doit passer la main au suivant
       next();
     }

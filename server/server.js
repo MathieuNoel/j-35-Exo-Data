@@ -16,4 +16,4 @@ app.use(session({
 
 app.use(router);
 
-app.listen(8888, _ => console.log('game server running'));
+app.listen(8888, _ => console.log('game server running','http://localhost:8888'));

@@ -1,7 +1,7 @@
 {
   "name": "idle-game",
   "version": "1.0.0",
-  "description": "",
+  "description": "Développer (encore) un jeu, ça te dit ? Promis, ce jeu n'implique aucune fourchette.",
   "main": "game.js",
   "scripts": {
     "dev": "nodemon server/server.js"
@@ -12,5 +12,14 @@
   "dependencies": {
     "express": "^4.17.1",
     "express-session": "^1.17.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Daguerre/Exo-Data-MathieuNoel.git"
+  },
+  "bugs": {
+    "url": "https://github.com/O-clock-Daguerre/Exo-Data-MathieuNoel/issues"
+  },
+  "homepage": "https://github.com/O-clock-Daguerre/Exo-Data-MathieuNoel#readme"
 }
