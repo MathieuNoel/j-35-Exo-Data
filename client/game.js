@@ -34,9 +34,10 @@ const app = {
     },
     loadGameState: async () => {
         const state = await fetch(app.baseUrl + '/status', {
-            credentials: 'include'
+            // credentials: 'include'
         }).then(response => response.json());
         app.gameState = state;
+        console.log('LALALALALALALALALALA',state);
 
         // si l'heure locale et celle du serveur ne coïncident pas, on peut afficher des informations fausses
         app.gameState.lastUpdate = Math.round(Date.now() / 1000);

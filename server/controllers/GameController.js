@@ -10,6 +10,7 @@ const GameController = {
         // mettre à jour la partie
         Game.update(game)
         // renvoyer le nouvel état de la partie
+        response.json(game)
     },
 
     upgradeSawmill: (request, response) => {
@@ -38,7 +39,7 @@ const GameController = {
     },
 
     initGame: (request, response, next) => {
-      Game.generate()
+      request.session.game = Game.generate()
       // ce MW ne répond pas, donc il doit passer la main au suivant
       next();
     }
