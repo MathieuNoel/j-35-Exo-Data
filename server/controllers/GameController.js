@@ -3,26 +3,35 @@ const Sawmill = require('../models/Sawmill');
 const Silo = require('../models/Silo');
 
 const GameController = {
-    status: (request, response) => {
-        const { game } = request.session;
-        // console.log(game);
-
-        // mettre à jour la partie
-        Game.update(game)
+    status: (request, response) => {        
+        let { game } = request.session; 
+                       
+        // mettre à jour la partie        
+        game = Game.update(game)
+        
         // renvoyer le nouvel état de la partie
+        request.session.game = game  
+         
         response.json(game)
     },
 
     upgradeSawmill: (request, response) => {
-        const { game } = request.session;
-
+        let { game } = request.session;
         // mettre à jour la partie, sinon on ne sera pas certain que le coût puisse être payé
-        game.generate(game)
+        game = Game.update(game)
         // si le stock permet de payer le coût
+        if(game.stock > game.sawmill.cost){
           // on retire le coût du stock
+          game.stock = game.stock - game.sawmill.cost
           // et on remplace la scierie actuelle par celle du niveau supérieur
-
-        return response.redirect('/status');
+          
+          game.sawmill = Sawmill.generate(game.sawmill.level)
+          console.log('=========>>>>>CELUI Là',request.session);
+          request.session.game = game
+          
+        }
+        
+          response.redirect('/status');
     },
 
     upgradeSilo: (request, response) => {
@@ -38,10 +47,14 @@ const GameController = {
         return response.redirect('/status');
     },
 
-    initGame: (request, response, next) => {
-      request.session.game = Game.generate()
-      // ce MW ne répond pas, donc il doit passer la main au suivant
-      next();
+    initGame: (request, response, next) => { 
+       
+      if(!request.session.game){
+        
+        request.session.game = Game.generate();
+         
+      }          
+         next()
     }
 };
 

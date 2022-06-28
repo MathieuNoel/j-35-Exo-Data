@@ -33,11 +33,11 @@ const app = {
         app.buttons.silo.addEventListener('click', app.handleSiloClick);
     },
     loadGameState: async () => {
-        const state = await fetch(app.baseUrl + '/status', {
-            // credentials: 'include'
+        const state = await fetch(app.baseUrl + '/status', {            
+            //  credentials: 'same-origin'
         }).then(response => response.json());
-        app.gameState = state;
-        console.log('LALALALALALALALALALA',state);
+        
+        app.gameState = state;        
 
         // si l'heure locale et celle du serveur ne coïncident pas, on peut afficher des informations fausses
         app.gameState.lastUpdate = Math.round(Date.now() / 1000);
@@ -69,20 +69,20 @@ const app = {
             app.buttons.silo.setAttribute('disabled', 'disabled');
         }
     },
-    handleSawmillClick: async (e) => {
-        const state = await fetch(app.baseUrl + '/sawmill/upgrade', {
-            credentials: 'include'
-        }).then(response => response.json());
+    handleSawmillClick: async (e) => {        
+        const response = await fetch(app.baseUrl + '/sawmill/upgrade' )
+        const state = await response.json()       
         app.gameState = state;
-
+        app.gameState.lastUpdate = Math.round(Date.now() / 1000);
         app.updateUI(state);
     },
+
     handleSiloClick: async () => {
         const state = await fetch(app.baseUrl + '/silo/upgrade', {
-            credentials: 'include'
+            credentials: 'same-origin'
         }).then(response => response.json());
         app.gameState = state;
-
+        
         app.updateUI(state);
     },
     updateGameState: () => {
