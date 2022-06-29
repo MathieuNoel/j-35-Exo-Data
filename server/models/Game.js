@@ -16,7 +16,7 @@ const Game = {
               level: 0,
               capacity: 30,
               cost: 15
-            },
+            },            
             lastUpdate: Date.now(),
           };
           

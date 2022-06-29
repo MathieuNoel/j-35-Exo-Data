@@ -82,7 +82,7 @@ const app = {
             credentials: 'same-origin'
         }).then(response => response.json());
         app.gameState = state;
-        
+        app.gameState.lastUpdate = Math.round(Date.now() / 1000);
         app.updateUI(state);
     },
     updateGameState: () => {
