@@ -1,28 +1,20 @@
-const session = require('express-session');
+
 const Sawmill = require('./Sawmill');
 const Silo = require('./Silo');
 
 const Game = {
-    generate: () => {
+    generate: (level) => {
       
       return { 
             stock: 0,
-            sawmill: {
-              level: 0,
-              yield: 0.2,
-              cost: 4
-            },
-            silo: {
-              level: 0,
-              capacity: 30,
-              cost: 15
-            },            
+            sawmill: Sawmill.generate(level),
+            silo: Silo.generate(level),            
             lastUpdate: Date.now(),
           };
           
         
     },
-    update: (game) => {
+    update: (game) => {      
       // 1. récupérer le timestamp Unix actuel en secondes        
       // ATTENTION : JS fournit l'information en millisecondes, il faut diviser le nombre obtenu par 1000
       // sinon, vous allez générer 0.2 bois par millisecondes, soit 200 unités par seconde :-D

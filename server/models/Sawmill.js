@@ -13,10 +13,10 @@ const Sawmill = {
         YIELD_FACTOR: 1.3,
         COST_FACTOR: 1.4
     },
-    generate: (level) => {
+    generate: (level) => {        
         // pour générer n'importe quel niveau, on va déjà cloner SawmillTemplate
-        const sawmill = {...SawmillTemplate}
-        sawmill.level = level + 1
+        const sawmill = {...SawmillTemplate}        
+        sawmill.level = level
         // puis boucler (level) fois
         for(let i = 0 ; i < sawmill.level ; i++ ){
             // et à chaque fois, multiplier yield par YIELD_FACTOR

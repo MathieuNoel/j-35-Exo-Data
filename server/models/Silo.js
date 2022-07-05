@@ -10,8 +10,8 @@ const Silo = {
         COST_FACTOR: 1.3
     },
     generate: (level) => {
-        const silo = {...SiloTemplate}
-        silo.level = level +1
+        const silo = {...SiloTemplate}        
+        silo.level = level
         for(let i =0 ; i < silo.level ; i++){
             silo.capacity = Math.round(silo.capacity * Silo.upgrade.CAPACITY_FACTOR)
             silo.cost = silo.cost * Silo.upgrade.COST_FACTOR
