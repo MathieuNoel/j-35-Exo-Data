@@ -1,6 +1,9 @@
 const Game = require('../models/Game');
 const Sawmill = require('../models/Sawmill');
 const Silo = require('../models/Silo');
+const Defense = require('../models/Defense');
+const Waves = require('../models/Waves');
+const Militia = require('../models/Militia');
 
 const GameController = {
     status: (request, response) => {        
@@ -44,11 +47,64 @@ const GameController = {
         }
         return response.redirect('/status');
     },
+
+    upgradeDefense: (request, response) => {
+      let {game} = request.session;      
+      game = Game.update(game)
+      if(game.silo.level < 4 ) return response.redirect('/status');
+      if(game.stock >= game.defense.cost) {
+        game.stock = game.stock - game.defense.cost;
+        game.defense = Defense.generate(game.defense.level + 1)
+        request.session.game = game
+      }
+      return response.redirect('/status');
+    },
+
+    theWaveIsComming: (request, response) => {
+      let {game} = request.session;            
+      if(game.defense < 1 ) return response.redirect('/status');      
+      game.defense.stamina = game.defense.stamina - game.wave.currentEnemies;
+      if(game.defense.stamina < 0) game.defense.stamina = 0           
+      game.wave = Waves.generate(game.wave.level + 1 )
+      game = Game.update(game)
+      if(game.defense.stamina == 0) {        
+        game.stock = game.stock - game.stock
+        game.wave.currentEnemies = game.wave.currentEnemies - game.wave.currentEnemies
+      } 
+      request.session.game = game
+      return response.redirect('/status');
+    },
+
+    getMilitia: (request, response) => {
+      let {game} = request.session;
+      if(game.defense.stamina < 20) return response.redirect('/status');
+      if(game.stock > game.militia.cost){
+        game.stock = game.stock - game.militia.cost;
+      
+        game.militia = Militia.generate(game.militia.level + 1)
+        if(game.wave.currentEnemies > game.militia.nbr){
+          game.wave.currentEnemies = game.wave.currentEnemies - game.militia.nbr;        
+        } else {
+          game.wave.currentEnemies = 0
+        }
+        if(game.militia.nbr > game.wave.currentEnemies) {
+          game.militia.nbr = game.militia.nbr - game.wave.currentEnemies
+        } else {
+          game.militia.nbr = 0
+        } 
+      } else {
+        return response.redirect('/status');
+      }     
+      game = Game.update(game);
+      request.session.game = game;
+      return response.redirect('/status');
+    },
+
     initGame: (request, response, next) => {        
       if(!request.session.game){        
         request.session.game = Game.generate(0);         
-      }          
-         next()
+      }              
+      next()
     }
 };
 

@@ -1,6 +1,9 @@
 
 const Sawmill = require('./Sawmill');
 const Silo = require('./Silo');
+const Defense = require('./Defense');
+const Wave = require('./Waves');
+const Militia = require('./Militia')
 
 const Game = {
     generate: (level) => {
@@ -8,7 +11,10 @@ const Game = {
       return { 
             stock: 0,
             sawmill: Sawmill.generate(level),
-            silo: Silo.generate(level),            
+            silo: Silo.generate(level),
+            defense: Defense.generate(level),
+            wave: Wave.generate(level),
+            militia: Militia.generate(level),          
             lastUpdate: Date.now(),
           };
           
